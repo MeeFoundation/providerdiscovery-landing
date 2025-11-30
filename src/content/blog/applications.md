@@ -10,12 +10,12 @@ This post describes a few applications of provider discovery.
 
 ## Authentication 
 
-Assume a person has a Google and an Twitter account. Further, assume they visit a website that supports four OpenID Connect authentication providers, namely, Google, Apple, Facebook and LinkedIn. The person (using some kind tool (e.g. a browser extension, etc.)) could configure their browser to include these two HTTP headers to disclose the two authentication providers that they'd like to use:
+Assume a person has a Google and a Twitter account. Further, assume they visit a ProviderDiscovery-compatible website that supports four OpenID Connect authentication providers, namely, Google, Apple, Facebook and LinkedIn. The person (using some kind tool (e.g. a browser extension, etc.)) could configure their browser to include these two HTTP headers to advertise the two authentication providers they use:
 
     Sec-PD: type=OpenIDConnect; cfg="https://google.com/pcf.toml"
     Sec-PD: type=OpenIDConnect; cfg="https://twitter.com/pcf.toml"
 
-A ProviderDiscovery-compatible website would read these headers, realize that it supports one of the two options (Google) and display a "Continue with Google" button. It would read the image data for this button from https://google.com/acf.toml in the OpenIDConnect section. In this way the website's log in page isn't cluttered with three extra buttons/options (Apple, Facebook, LinkedIn) that the person can't use. Instead, it displays the one button (Google) that the user can and prefers to use.
+When the person visits this website, the site read these two headers. The intersection of the set of four providers the website supports and the set of two providers the person uses contains the common element, Google. Thus, the website displays (only) a "Continue with Google" button. To display the button it reads the image data for this button from https://google.com/acf.toml in the OpenIDConnect section. In this way the website's log in page isn't cluttered with three extra buttons/options (Apple, Facebook, LinkedIn) that the person can't use. Instead, it displays the one button (Google) that the user can and prefers to use.
 
 ## Digital wallet
 
