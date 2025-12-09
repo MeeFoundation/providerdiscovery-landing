@@ -7,22 +7,14 @@ title: "Provider Discovery"
 
 Assume a person employs one or more *providers* (e.g. authentication provider, wallet provider, age verification provider, etc.) as part of their interactions with mobile apps or web servers (*servers*) using a *client* (web browser or mobile OS).  Provider Discovery is a specification that defines how the *server* can learn of the existence of these providers, and in some cases, characteristics about them.
 
-Two alternative flows: *discovery* (recommended) and *announcement*. 
-
-The *discovery* flow is as follows:
+The flow is as follows:
 
 1. The server sends to the client a list of one or more `provider-types` that it supports
 2. In response, the client sends a list of zero or more `provider-types` matching the those sent by the server that it (the client) supports. 
 
+For each provider-type in the list sent by by client, a `config-url` key-value parameter may be provided along with zero or more other key-value pairs specific to this provider-type.
+
 Note: the person may choose to configure their client such that it returns different responses (in #2 above) to different servers. 
-
-The alternative, *announcement* flow is as follows:
-
-1. The client sends a list of zero or more `provider-types` that it supports. 
-
-Since this flow discloses information which could be used for fingerprinting by the server, it should be used only in exceptional cases.
-
-In either flow, for each provider-type in the list sent by by client, a `config-url` key-value parameter may be provided along with zero or more other key-value pairs specific to this provider-type.
 
 **Provider-type**
 
@@ -31,7 +23,7 @@ The `provider-type` must be one of the following:
 - "OpenIDConnect" - the person has an OpenID provider
 - "SIOPv2" - the person has a self-issued OpenID provider 
 - "AgeProtectv1" - the person has an age verification service provider 
-- ...TBD
+- "GlobalPrivacyControlv2" - the person wishes to send the Global Pivacy Control signal
 
 **Config-url**
 
